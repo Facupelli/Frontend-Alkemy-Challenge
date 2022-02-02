@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { Login } from "./Login";
+import { NavBar } from "./NavBar";
+import { Plates } from "./Plates";
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
-
-  console.log(loginModal)
 
   const handleLoginClick = () => {
     setLoginModal(true);
   };
 
   return (
-    <>
+    <div className="bg-dark">
       {loginModal && <Login loginModal={loginModal} setLoginModal={setLoginModal} />}
-      <div>
-        <div>Home</div>
-        <span onClick={handleLoginClick}>Login</span>
+      <NavBar loginModal={loginModal} setLoginModal={setLoginModal}/>
+      <div >
+        <Plates />
       </div>
-    </>
+    </div>
   );
 };
