@@ -8,7 +8,7 @@ import { Search } from "./Search";
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
-  const [plates, setPlates] = useState([]);
+  const [menuPlates, setMenuPlates] = useState([]);
 
   const [seeSearch, setSeeSearch] = useState(false);
   const [seeMenu, setSeeMenu] = useState(true);
@@ -20,7 +20,7 @@ export const Home = () => {
   // console.log(searchRecipe())
 
   return (
-    <div className="bg-dark vh-100">
+    <div className="bg-dark ">
       {loginModal && (
         <Login loginModal={loginModal} setLoginModal={setLoginModal} />
       )}
@@ -38,7 +38,7 @@ export const Home = () => {
         </div>
       )}
       {seeSearch && (
-        <div>
+        <div className="mb-4">
           <Search />
         </div>
       )}
