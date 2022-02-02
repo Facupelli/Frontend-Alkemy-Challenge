@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { getRecipeById, searchRecipe } from "../info-api/api";
 import { Login } from "./Login";
 import { NavBar } from "./NavBar";
@@ -12,10 +11,6 @@ export const Home = () => {
 
   const [seeSearch, setSeeSearch] = useState(false);
   const [seeMenu, setSeeMenu] = useState(true);
-
-  const handleLoginClick = () => {
-    setLoginModal(true);
-  };
 
   // console.log(searchRecipe())
   // console.log(getRecipeById(648176))

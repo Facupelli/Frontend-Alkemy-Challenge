@@ -3,13 +3,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
-const plateMock = {
-  id: 654959,
-  title: "Pasta With Tuna",
-  image: "https://spoonacular.com/recipeImages/654959-312x231.jpg",
-  imageType: "jpg",
-};
-
 export const Plate = ({ image, title, search,id }) => {
   return (
     <Card style={{ width: "15rem" }}>
