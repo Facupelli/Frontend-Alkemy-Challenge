@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { searchRecipe } from "../info-api/api";
+import { getRecipeById, searchRecipe } from "../info-api/api";
 import { Login } from "./Login";
 import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
@@ -18,6 +18,7 @@ export const Home = () => {
   };
 
   // console.log(searchRecipe())
+  // console.log(getRecipeById(648176))
 
   return (
     <div className="bg-dark ">

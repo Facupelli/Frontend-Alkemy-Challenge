@@ -58,7 +58,7 @@ export const Search = () => {
           <Row className="justify-content-center gap-5">
             {platesSearched.length > 0 &&
               platesSearched.map((el) => (
-                <Plate key={el.id} image={el.image} title={el.title} />
+                <Plate key={el.id} image={el.image} title={el.title} search={true} id={el.id}/>
               ))}
           </Row>
         </Container>
