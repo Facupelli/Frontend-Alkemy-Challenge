@@ -20,7 +20,7 @@ export const Home = () => {
   // console.log(searchRecipe())
 
   return (
-    <div className="bg-dark">
+    <div className="bg-dark vh-100">
       {loginModal && (
         <Login loginModal={loginModal} setLoginModal={setLoginModal} />
       )}

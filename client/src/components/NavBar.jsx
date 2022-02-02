@@ -2,8 +2,7 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import { Link, useNavigate } from "react-router-dom";
-import { set } from "react-hook-form";
+import {  useNavigate } from "react-router-dom";
 
 export const NavBar = ({ loginModal, setLoginModal, seeSearch, setSeeSearch, setSeeMenu, seeMenu }) => {
   const navigate = useNavigate();
