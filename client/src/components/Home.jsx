@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { getRecipeById, searchRecipe } from "../info-api/api";
 import { Login } from "./Login";
 import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
 import { Search } from "./Search";
+import {StoreContext} from '../context/context'
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
-  const [menuPlates, setMenuPlates] = useState([]);
+
+  const {menuPlates} = useContext(StoreContext);
+  console.log('HOME',menuPlates)
+  
+
 
   const [seeSearch, setSeeSearch] = useState(false);
   const [seeMenu, setSeeMenu] = useState(true);
