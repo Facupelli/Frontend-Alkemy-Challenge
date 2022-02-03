@@ -5,15 +5,13 @@ import { Login } from "./Login";
 import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
 import { Search } from "./Search";
-import {StoreContext} from '../context/context'
+import { StoreContext } from "../context/context";
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
 
-  const {menuPlates} = useContext(StoreContext);
-  console.log('HOME',menuPlates)
-  
-
+  const { menuPlates } = useContext(StoreContext);
+  console.log("HOME", menuPlates);
 
   const [seeSearch, setSeeSearch] = useState(false);
   const [seeMenu, setSeeMenu] = useState(true);
@@ -26,14 +24,7 @@ export const Home = () => {
       {loginModal && (
         <Login loginModal={loginModal} setLoginModal={setLoginModal} />
       )}
-      <NavBar
-        loginModal={loginModal}
-        setLoginModal={setLoginModal}
-        seeSearch={seeSearch}
-        setSeeSearch={setSeeSearch}
-        seeMenu={seeMenu}
-        setSeeMenu={setSeeMenu}
-      />
+      <NavBar loginModal={loginModal} setLoginModal={setLoginModal} />
       {seeMenu && (
         <div>
           <Plates />

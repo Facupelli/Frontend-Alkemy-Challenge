@@ -42,18 +42,18 @@ export const MenuInfo = () => {
             {new Intl.NumberFormat("es-AR", {
               style: "currency",
               currency: "ARS",
-            }).format(menuPrice())}
+            }).format(menuPlates.length > 0 ? menuPrice() : 0)}
           </p>
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
           <span>Preparation time average:</span>
-          <p className="fs-5">{preparationTime()} minutes</p>
+          <p className="fs-5">{menuPlates.length > 0 ? preparationTime() : 0} minutes</p>
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
           <span>Health score average:</span>
-          <p className="fs-5">{healthScore()}</p>
+          <p className="fs-5">{menuPlates.length > 0 ? healthScore() : 0}</p>
         </Col>
       </Row>
     </Container>

@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { useState } from "react";
 import { searchRecipe } from "../info-api/api";
 import { Plate } from "./Plate";
+import { NavBar } from "./NavBar";
 
 export const Search = () => {
   const [platesSearched, setPlatesSearched] = useState([]);
@@ -28,8 +29,9 @@ export const Search = () => {
   });
 
   return (
-    <div className="bg-dark text-white m-5 min-vh-100 position-relative " >
-      <div>
+    <div className="bg-dark  min-vh-100 position-relative " >
+      <NavBar />
+      <div className="text-white m-5">
         <form onSubmit={formik.handleSubmit}>
           <div className="input-group w-50 mx-auto">
             <input

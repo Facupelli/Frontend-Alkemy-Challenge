@@ -2,15 +2,16 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const NavBar = ({ loginModal, setLoginModal, seeSearch, setSeeSearch, setSeeMenu, seeMenu }) => {
+export const NavBar = ({
+  loginModal,
+  setLoginModal,
+}) => {
   const navigate = useNavigate();
 
   const navigateHome = () => {
     navigate("/");
-    setSeeSearch(false)
-    setSeeMenu(true)
   };
 
   const handleLogin = () => {
@@ -18,9 +19,8 @@ export const NavBar = ({ loginModal, setLoginModal, seeSearch, setSeeSearch, set
   };
 
   const navigateSearch = () => {
-    setSeeMenu(!seeMenu)
-    setSeeSearch(!seeSearch)
-  }
+    navigate("/search");
+  };
 
   return (
     <Navbar bg="dark" variant="dark">
