@@ -19,9 +19,9 @@ export const Plates = () => {
             <Plate image={el.image} title={el.title} id={el.id} />
           ))} */}
         {menuPlates.length > 0 && (
-          <Container>
-            <Row>
-              <Col>
+          <Container className="m-0 p-0">
+            <Row className="m-0 p-0">
+              <Col className="m-0 p-0">
                 {menuPlates.length > 0 && (
                   <Plate
                     image={menuPlates[0].image}
@@ -31,7 +31,7 @@ export const Plates = () => {
                   />
                 )}
               </Col>
-              <Col>
+              <Col className="m-0 p-0">
                 {menuPlates.length > 1 && (
                   <Plate
                     image={menuPlates[1].image}
@@ -42,8 +42,8 @@ export const Plates = () => {
                 )}
               </Col>
             </Row>
-            <Row>
-              <Col>
+            <Row className="m-0 p-0">
+              <Col className="m-0 p-0">
                 {menuPlates.length > 2 && (
                   <Plate
                     image={menuPlates[2].image}
@@ -53,7 +53,7 @@ export const Plates = () => {
                   />
                 )}
               </Col>
-              <Col>
+              <Col className="m-0 p-0">
                 {menuPlates.length > 3 && (
                   <Plate
                     image={menuPlates[3].image}

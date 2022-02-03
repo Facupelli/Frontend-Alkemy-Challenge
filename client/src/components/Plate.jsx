@@ -9,9 +9,12 @@ import { useState } from "react";
 import { MenuWarning } from "./MenuWarning";
 
 export const Plate = ({ image, title, search, id, menu }) => {
-  const { menuPlates, setMenuPlates } = useContext(StoreContext);
+  const { menuPlates, setMenuPlates, vegCount, setVegCount } = useContext(StoreContext);
 
   const [modal, setModal] = useState(false);
+  const [vegModal, setVegModal] = useState(false);
+
+  console.log(vegModal)
 
   const handleRemove = () => {
     console.log("ENTRE");
@@ -22,17 +25,33 @@ export const Plate = ({ image, title, search, id, menu }) => {
 
   const handleAddToMenu = async () => {
     const plate = await getRecipeById(id);
-    if (menuPlates.length < 4) {
-      setMenuPlates([...menuPlates, plate]);
-    } else {
-      setModal(true);
+    if (plate.vegetarian === true && vegCount === 2) {
+      console.log('entre')
+      setVegModal(true);
+    }
+    if (plate.vegetarian === true && vegCount < 2) {
+      if (menuPlates.length < 4) {
+        setMenuPlates([...menuPlates, plate]);
+        setVegCount(vegCount + 1);
+      } else {
+        setModal(true);
+      }
+    }
+    if (plate.vegetarian === false) {
+      if (menuPlates.length < 4) {
+        setMenuPlates([...menuPlates, plate]);
+      } else {
+        setModal(true);
+      }
     }
   };
 
   return (
     <>
       {modal && <MenuWarning modal={modal} setModal={setModal} />}
-      <Card style={{ width: menu ? "25rem" : "15rem" }}>
+      {vegModal && <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />}
+
+      <Card style={{ width: menu ? "25rem" : "15rem" }} >
         <Link to={`/recipe/${id}`}>
           <Card.Img
             variant="top"
