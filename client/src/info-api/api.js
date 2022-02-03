@@ -29,10 +29,10 @@ export const getRecipeById = async (id) => {
       id,
       title,
       readyInMinutes,
-      servings,
       image,
       cuisines,
       dishTypes,
+      pricePerServing,
     }) => ({
       vegetarian,
       glutenFree,
@@ -41,10 +41,10 @@ export const getRecipeById = async (id) => {
       id,
       title,
       readyInMinutes,
-      servings,
       image,
       cuisines,
       dishTypes,
+      pricePerServing,
     }))(recipe.data);
 
     return recipeInfoNeeded;

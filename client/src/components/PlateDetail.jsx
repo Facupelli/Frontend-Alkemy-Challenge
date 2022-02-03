@@ -15,8 +15,7 @@ export const PlateDetail = () => {
   const [plate, setPlate] = useState({});
   console.log("PLATE", plate);
 
-  const {menuPlates,setMenuPlates} = useContext(StoreContext);
-
+  const { menuPlates, setMenuPlates } = useContext(StoreContext);
 
   useEffect(() => {
     if (id) {
@@ -25,14 +24,17 @@ export const PlateDetail = () => {
   }, [id]);
 
   const handleAddToMenu = () => {
-    setMenuPlates([...menuPlates, plate])
-  }
+    setMenuPlates([...menuPlates, plate]);
+  };
 
   return (
     <div className="bg-dark text-white min-vh-100">
       <NavBar />
       {plate && (
-        <Card style={{ width: "35rem" }} className="bg-secondary p-0 mt-5 mx-auto">
+        <Card
+          style={{ width: "35rem" }}
+          className="bg-secondary p-0 mt-5 mx-auto"
+        >
           <div>
             <Card.Img variant="top" src={plate.image} alt="palte" />
           </div>
@@ -42,7 +44,7 @@ export const PlateDetail = () => {
               <p className="h3 text-dark">{plate.title}</p>
             </div>
 
-            <div className="d-flex gap-3">
+            <div className="d-flex flex-wrap gap-3">
               <div className="d-flex gap-2 align-items-baseline">
                 <p className="h6">Health Score:</p>
                 <p className="text-dark fw-bold">{plate.healthScore}</p>
@@ -51,11 +53,18 @@ export const PlateDetail = () => {
                 <p className="h6">Ready in Minutes:</p>
                 <p className="text-dark fw-bold">{plate.readyInMinutes}</p>
               </div>
+            </div>
+
+            <div className="d-flex flex-wrap gap-3">
               <div className="d-flex gap-2 align-items-baseline">
                 <p className="h6">Vegetarian:</p>
                 <p className="text-dark fw-bold">
                   {plate.vegetarian === false ? "False" : "True"}
                 </p>
+              </div>
+              <div className="d-flex gap-2 align-items-baseline">
+                <p className="h6">Price:</p>
+                <p className="text-dark fw-bold">${plate.pricePerServing}</p>
               </div>
             </div>
 

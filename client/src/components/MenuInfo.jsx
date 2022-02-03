@@ -2,8 +2,37 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {StoreContext} from '../context/context'
+import { useContext } from "react";
+import { useEffect } from "react";
+
 
 export const MenuInfo = () => {
+
+  const {menuPlates} = useContext(StoreContext);
+
+  const menuPrice = () => {
+    if(menuPlates.length > 0){
+     const prices = menuPlates.map(el => el.pricePerServing) ;
+     return prices.reduce((prevVal, currentVal)=> prevVal + currentVal).toFixed(2)
+    } 
+  }
+
+  const preparationTime = () => {
+    if(menuPlates.length > 0){
+      const prices = menuPlates.map(el => el.readyInMinutes) ;
+      return prices.reduce((prevVal, currentVal)=> prevVal + currentVal).toFixed(0)
+     } 
+  }
+
+  const healthScore = () => {
+    if(menuPlates.length > 0){
+      const prices = menuPlates.map(el => el.healthScore) ;
+      return prices.reduce((prevVal, currentVal)=> prevVal + currentVal).toFixed(0)
+     } 
+  }
+
+
   return (
     <Container className="mt-5 text-white">
       <Row>
@@ -13,18 +42,18 @@ export const MenuInfo = () => {
             {new Intl.NumberFormat("es-AR", {
               style: "currency",
               currency: "ARS",
-            }).format(1000)}
+            }).format(menuPrice())}
           </p>
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
           <span>Preparation time average:</span>
-          <p className="fs-5">125 minutes</p>
+          <p className="fs-5">{preparationTime()} minutes</p>
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
           <span>Health score average:</span>
-          <p className="fs-5">50</p>
+          <p className="fs-5">{healthScore()}</p>
         </Col>
       </Row>
     </Container>

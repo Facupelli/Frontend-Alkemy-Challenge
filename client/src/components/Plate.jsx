@@ -3,9 +3,9 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
-export const Plate = ({ image, title, search,id }) => {
+export const Plate = ({ image, title, search,id, menu }) => {
   return (
-    <Card style={{ width: "15rem" }}>
+    <Card style={{ width: menu ? "25rem" : "15rem" }}>
       <Link to={`/recipe/${id}`}>
         <Card.Img
           variant="top"
@@ -20,7 +20,7 @@ export const Plate = ({ image, title, search,id }) => {
           See more
         </Button> */}
         {search && (
-          <Button variant="primary" className="">
+          <Button variant="primary">
             Add to Menu
           </Button>
         )}
