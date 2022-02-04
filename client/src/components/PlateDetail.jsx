@@ -9,10 +9,12 @@ import Button from "react-bootstrap/Button";
 import { useContext } from "react";
 import { StoreContext } from "../context/context";
 import { MenuWarning } from "./MenuWarning";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 export const PlateDetail = () => {
   let { id } = useParams();
 
+  const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState();
   const [vegModal, setVegModal] = useState();
   const [isPlateInMenu, setIsPlateInMenu] = useState(false);
@@ -25,7 +27,9 @@ export const PlateDetail = () => {
 
   useEffect(() => {
     if (id) {
-      getRecipeById(id).then((res) => setPlate(res));
+      getRecipeById(id)
+        .then((res) => setPlate(res))
+        .then(() => setLoading(false));
     }
   }, [id]);
 
@@ -57,7 +61,7 @@ export const PlateDetail = () => {
   };
 
   return (
-    <>
+    <div className="position-relative bg-dark min-vh-100 min-vw-100">
       {vegModal && (
         <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />
       )}
@@ -70,65 +74,67 @@ export const PlateDetail = () => {
         />
       )}
 
-      <div className="bg-dark text-white min-vh-100">
-        <NavBar />
-        {plate && (
-          <Card
-            style={{ width: "25rem" }}
-            className="bg-secondary p-0 mt-5 mx-auto"
-          >
-            <div>
-              <Card.Img variant="top" src={plate.image} alt="palte" />
-            </div>
-
-            <Card.Body>
-              <div>
-                <p className="h3 text-dark">{plate.title}</p>
-              </div>
-
-              <div className="d-flex flex-wrap gap-3">
-                <div className="d-flex gap-2 align-items-baseline">
-                  <p className="h6">Health Score:</p>
-                  <p className="text-dark fw-bold">{plate.healthScore}</p>
+      {loading ? (
+        <div className="position-absolute top-50 start-50 translate-middle ">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      ) : (
+        <div className="bg-dark text-white min-vh-100">
+          <NavBar />
+          {plate && (
+            <Card
+              style={{ width: "50rem" }}
+              className="bg-secondary p-0 mt-5 mx-auto"
+            >
+              <div className="d-flex">
+                <div>
+                  <div>
+                    <Card.Img variant="top" src={plate.image} alt="palte" />
+                  </div>
                 </div>
-                <div className="d-flex gap-2 align-items-baseline">
-                  <p className="h6">Ready in Minutes:</p>
-                  <p className="text-dark fw-bold">{plate.readyInMinutes}</p>
-                </div>
-              </div>
 
-              <div className="d-flex flex-wrap gap-3">
-                <div className="d-flex gap-2 align-items-baseline">
-                  <p className="h6">Vegan:</p>
-                  <p className="text-dark fw-bold">
-                    {plate.vegan === false ? "False" : "True"}
-                  </p>
-                </div>
-                <div className="d-flex gap-2 align-items-baseline">
-                  <p className="h6">Price:</p>
-                  <p className="text-dark fw-bold">${plate.pricePerServing}</p>
-                </div>
-              </div>
+                <Card.Body className="position-relative ps-3 pt-1 ">
+                  <p className="h3 text-dark">{plate.title}</p>
 
-              {/* <div className="d-flex gap-3 align-items-baseline">
-              <p className="h6">Cuisines:</p>
-              <div className="d-flex gap-3">
-                {plate.cuisines &&
-                  plate.cuisines.map((el) => <p key={el} className="text-dark fw-bold">{el}</p>)}
-              </div>
-            </div> */}
+                  <div className="d-flex gap-2 align-items-baseline pt-2 pb-2">
+                    <p className="h6 m-0">Health Score:</p>
+                    <p className="text-dark fw-bold m-0">{plate.healthScore}</p>
+                  </div>
+                  <div className="d-flex gap-2 align-items-baseline pb-2">
+                    <p className="h6 m-0">Ready in Minutes:</p>
+                    <p className="text-dark fw-bold m-0">
+                      {plate.readyInMinutes}
+                    </p>
+                  </div>
 
-              <Button
-                variant="primary"
-                className="m-0"
-                onClick={handleAddToMenu}
-              >
-                Add to Menu<i className="bi bi-plus"></i>
-              </Button>
-            </Card.Body>
-          </Card>
-        )}
-      </div>
-    </>
+                  <div className="d-flex gap-2 align-items-baseline pb-2">
+                    <p className="h6 m-0">Vegan:</p>
+                    <p className="text-dark fw-bold m-0">
+                      {plate.vegan === false ? "False" : "True"}
+                    </p>
+                  </div>
+                  <div className="d-flex gap-2 align-items-baseline pb-2">
+                    <p className="h6 m-0">Price:</p>
+                    <p className="text-dark fw-bold m-0">
+                      ${plate.pricePerServing}
+                    </p>
+                  </div>
+
+                  <div className="position-absolute bottom-0 pb-3 mt-1">
+                    <Button
+                      variant="primary"
+                      onClick={handleAddToMenu}
+                      className="m-0"
+                    >
+                      Add to Menu<i className="bi bi-plus"></i>
+                    </Button>
+                  </div>
+                </Card.Body>
+              </div>
+            </Card>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
