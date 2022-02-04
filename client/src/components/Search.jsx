@@ -21,7 +21,7 @@ export const Search = () => {
 
   const [count, setCount] = useState(1);
 
-  console.log("state", platesSearched);
+  console.log("PLATES SEARCHED", platesSearched);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,11 +31,10 @@ export const Search = () => {
   }, []);
 
   const handleLoadMore = async () => {
-    await searchRecipe(valueSearched, count)
-      .then((res) => {
-        const newState = [...platesSearched,res].flat()
-        setPlatesSearched(newState)
-      })
+    await searchRecipe(valueSearched, count).then((res) => {
+      const newState = [...platesSearched, res].flat();
+      setPlatesSearched(newState);
+    });
   };
 
   const formik = useFormik({
@@ -43,12 +42,12 @@ export const Search = () => {
       title: "",
     },
     onSubmit: async (values) => {
-      console.log(values);
       setLoading(true);
       await searchRecipe(values)
         .then((res) => setPlatesSearched(res))
         .then(() => setLoading(false))
-        .then(() => setValueSearched(values));
+        .then(() => setValueSearched(values))
+        .catch((e) => console.log(e));
     },
   });
 
@@ -89,7 +88,7 @@ export const Search = () => {
         <>
           <Container className="mt-5 bg-dark gap-2">
             <Row className="justify-content-center gap-5">
-              {platesSearched.length > 0 &&
+              {platesSearched && platesSearched.length > 0 &&
                 platesSearched.map((el) => (
                   <Plate
                     key={el.id}
@@ -101,7 +100,7 @@ export const Search = () => {
                 ))}
             </Row>
           </Container>
-          {platesSearched.length > 0 && (
+          {platesSearched && platesSearched.length > 0 && (
             <div className="d-flex justify-content-center mt-4 pb-4">
               <Button
                 variant="outline-primary"

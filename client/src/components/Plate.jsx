@@ -24,6 +24,7 @@ export const Plate = ({
 
   const [modal, setModal] = useState(false);
   const [vegModal, setVegModal] = useState(false);
+  const [isPlateInMenu, setIsPlateInMenu] = useState(false);
 
   const handleRemove = () => {
     const plates = menuPlates.filter((el) => id !== el.id);
@@ -44,32 +45,39 @@ export const Plate = ({
 
   const handleAddToMenu = async () => {
     const plate = await getRecipeById(id);
-    if (plate.vegan === true && vegCount.veg === 2) {
-      setVegModal(true);
-    }
-    if (plate.vegan === true && vegCount.veg < 2) {
-      if (menuPlates.length < 4) {
-        setMenuPlates([...menuPlates, plate]);
-        setVegCount({
-          veg: vegCount.veg + 1,
-          meat: vegCount.meat,
-        });
-      } else {
-        setModal(true);
+
+    const isPlateInMenu = menuPlates.filter((el) => el.id === plate.id);
+
+    if (isPlateInMenu.length > 0) {
+      setIsPlateInMenu(true);
+    } else {
+      if (plate.vegan === true && vegCount.veg === 2) {
+        setVegModal(true);
       }
-    }
-    if (plate.vegan === false && vegCount.meat === 2) {
-      setVegModal(true);
-    }
-    if (plate.vegan === false && vegCount.meat < 2) {
-      if (menuPlates.length < 4) {
-        setMenuPlates([...menuPlates, plate]);
-        setVegCount({
-          veg: vegCount.veg,
-          meat: vegCount.meat + 1,
-        });
-      } else {
-        setModal(true);
+      if (plate.vegan === true && vegCount.veg < 2) {
+        if (menuPlates.length < 4) {
+          setMenuPlates([...menuPlates, plate]);
+          setVegCount({
+            veg: vegCount.veg + 1,
+            meat: vegCount.meat,
+          });
+        } else {
+          setModal(true);
+        }
+      }
+      if (plate.vegan === false && vegCount.meat === 2) {
+        setVegModal(true);
+      }
+      if (plate.vegan === false && vegCount.meat < 2) {
+        if (menuPlates.length < 4) {
+          setMenuPlates([...menuPlates, plate]);
+          setVegCount({
+            veg: vegCount.veg,
+            meat: vegCount.meat + 1,
+          });
+        } else {
+          setModal(true);
+        }
       }
     }
   };
@@ -79,6 +87,13 @@ export const Plate = ({
       {modal && <MenuWarning modal={modal} setModal={setModal} />}
       {vegModal && (
         <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />
+      )}
+      {isPlateInMenu && (
+        <MenuWarning
+          modal={isPlateInMenu}
+          setModal={setIsPlateInMenu}
+          isPlate={true}
+        />
       )}
 
       <Card
@@ -97,7 +112,9 @@ export const Plate = ({
           />
         </Link>
         <Card.Body className="pt-2 position-relative ">
-          <Card.Title className="text-dark ">{title.length > 40 ? title.slice(0,40) + '...' : title}</Card.Title>
+          <Card.Title className="text-dark ">
+            {title.length > 40 ? title.slice(0, 40) + "..." : title}
+          </Card.Title>
           <hr className="mt-0 mb-2 text-primary " />
           {/* <Button variant="primary" className="">
           See more

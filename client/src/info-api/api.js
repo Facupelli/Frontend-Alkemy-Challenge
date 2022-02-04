@@ -3,7 +3,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const searchRecipe = async (values, count = 0) => {
   try {
-    console.log('values', values)
+    console.log('values', values, 'COUNt', count)
     const title = values.title;
 
     const offset = count * 12;
@@ -12,6 +12,7 @@ export const searchRecipe = async (values, count = 0) => {
       `https://api.spoonacular.com/recipes/complexSearch?&titleMatch=${title}&number=12&offset=${offset}&apiKey=${API_KEY}`
     );
     const apiInfo = await api.data.results;
+
     return apiInfo;
   } catch (e) {
     console.log(e);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Login } from "./Login";
 import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
-import { Search } from "./Search";
 import { MenuInfo } from "./MenuInfo";
 import { useEffect } from "react";
 

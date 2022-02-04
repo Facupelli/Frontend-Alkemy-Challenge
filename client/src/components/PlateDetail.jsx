@@ -15,6 +15,7 @@ export const PlateDetail = () => {
 
   const [modal, setModal] = useState();
   const [vegModal, setVegModal] = useState();
+  const [isPlateInMenu, setIsPlateInMenu] = useState(false);
 
   const [plate, setPlate] = useState({});
   console.log("PLATE", plate);
@@ -29,30 +30,45 @@ export const PlateDetail = () => {
   }, [id]);
 
   const handleAddToMenu = () => {
-    if (plate.vegan === true && vegCount === 2) {
-      setVegModal(true)
-    }
-    if (plate.vegan === true && vegCount < 2) {
-      if (menuPlates.length < 4) {
-        setMenuPlates([...menuPlates, plate]);
-        setVegCount(vegCount + 1)
-      } else {
-        setModal(true);
+    const isPlateInMenu = menuPlates.filter((el) => el.id === plate.id);
+
+    if (isPlateInMenu.length > 0) {
+      setIsPlateInMenu(true);
+    } else {
+      if (plate.vegan === true && vegCount === 2) {
+        setVegModal(true);
       }
-    }
-    if (plate.vegan === false) {
-      if (menuPlates.length < 4) {
-        setMenuPlates([...menuPlates, plate]);
-      } else {
-        setModal(true);
+      if (plate.vegan === true && vegCount < 2) {
+        if (menuPlates.length < 4) {
+          setMenuPlates([...menuPlates, plate]);
+          setVegCount(vegCount + 1);
+        } else {
+          setModal(true);
+        }
+      }
+      if (plate.vegan === false) {
+        if (menuPlates.length < 4) {
+          setMenuPlates([...menuPlates, plate]);
+        } else {
+          setModal(true);
+        }
       }
     }
   };
 
   return (
     <>
-      {vegModal && <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />}
+      {vegModal && (
+        <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />
+      )}
       {modal && <MenuWarning modal={modal} setModal={setModal} />}
+      {isPlateInMenu && (
+        <MenuWarning
+          modal={isPlateInMenu}
+          setModal={setIsPlateInMenu}
+          isPlate={true}
+        />
+      )}
 
       <div className="bg-dark text-white min-vh-100">
         <NavBar />
