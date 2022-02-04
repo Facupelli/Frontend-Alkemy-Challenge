@@ -101,7 +101,7 @@ export const Plate = ({
           width: menu ? "16rem" : "15rem",
           minHeight: menu ? "27rem" : "20rem",
         }}
-        className=""
+        className="ps-0 pe-0"
       >
         <Link to={`/recipe/${id}`}>
           <Card.Img
@@ -146,7 +146,7 @@ export const Plate = ({
               </div>
             </div>
           )}
-          <div className="position-absolute bottom-0 pb-3">
+          <div className="position-absolute bottom-0 pb-2">
             {search && (
               <Button variant="primary" onClick={handleAddToMenu}>
                 Add to Menu
