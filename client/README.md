@@ -7,6 +7,8 @@ Then you have the search tab, where you can search for a plate to add it to the 
 The detail tab, where you can see the plate details.
 You can not enter any routee unless you are logged.
 
+The app uses the spoonacular API (https://spoonacular.com/)
+
 <img src="./media/home.png" alt="start_screen"/>
 
 
