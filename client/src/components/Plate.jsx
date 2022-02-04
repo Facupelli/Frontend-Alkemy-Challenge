@@ -8,13 +8,22 @@ import { getRecipeById } from "../info-api/api";
 import { useState } from "react";
 import { MenuWarning } from "./MenuWarning";
 
-export const Plate = ({ image, title, search, id, menu }) => {
-  const { menuPlates, setMenuPlates, vegCount, setVegCount } = useContext(StoreContext);
+export const Plate = ({
+  image,
+  title,
+  search,
+  id,
+  menu,
+  vegetarian,
+  pricePerServing,
+  readyInMinutes,
+  healthScore,
+}) => {
+  const { menuPlates, setMenuPlates, vegCount, setVegCount } =
+    useContext(StoreContext);
 
   const [modal, setModal] = useState(false);
   const [vegModal, setVegModal] = useState(false);
-
-  console.log(vegModal)
 
   const handleRemove = () => {
     console.log("ENTRE");
@@ -26,7 +35,7 @@ export const Plate = ({ image, title, search, id, menu }) => {
   const handleAddToMenu = async () => {
     const plate = await getRecipeById(id);
     if (plate.vegetarian === true && vegCount === 2) {
-      console.log('entre')
+      console.log("entre");
       setVegModal(true);
     }
     if (plate.vegetarian === true && vegCount < 2) {
@@ -49,9 +58,14 @@ export const Plate = ({ image, title, search, id, menu }) => {
   return (
     <>
       {modal && <MenuWarning modal={modal} setModal={setModal} />}
-      {vegModal && <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />}
+      {vegModal && (
+        <MenuWarning modal={vegModal} setModal={setVegModal} veg={true} />
+      )}
 
-      <Card style={{ width: menu ? "25rem" : "15rem" }} >
+      <Card
+        style={{ width: menu ? "17rem" : "15rem", minHeight: "27rem" }}
+        className=""
+      >
         <Link to={`/recipe/${id}`}>
           <Card.Img
             variant="top"
@@ -60,21 +74,48 @@ export const Plate = ({ image, title, search, id, menu }) => {
             alt="Card image"
           />
         </Link>
-        <Card.Body>
-          <Card.Title className="text-dark">{title}</Card.Title>
+        <Card.Body className="pt-2 position-relative">
+          <Card.Title className="text-dark ">{title}</Card.Title>
+          <hr className="mt-0 mb-2 text-primary " />
           {/* <Button variant="primary" className="">
           See more
         </Button> */}
-          {search && (
-            <Button variant="primary" onClick={handleAddToMenu}>
-              Add to Menu
-            </Button>
-          )}
           {menu && (
-            <Button variant="danger" onClick={handleRemove}>
-              Remove
-            </Button>
+            <div>
+              <div className="d-flex gap-2 align-items-baseline">
+                <p className="h6 ">Health Score:</p>
+                <p className="text-dark fw-bold m-0 p-0">{healthScore}</p>
+              </div>
+              <div className="d-flex gap-2 align-items-baseline">
+                <p className="h6">Ready in Minutes:</p>
+                <p className="text-dark fw-bold m-0 p-0">{readyInMinutes}</p>
+              </div>
+
+              <div className="d-flex gap-2 align-items-baseline">
+                <p className="h6">Vegetarian:</p>
+                <p className="text-dark fw-bold m-0 p-0">
+                  {vegetarian === false ? "False" : "True"}
+                </p>
+              </div>
+              <div className="d-flex gap-2 align-items-baseline">
+                <p className="h6">Price:</p>
+                <p className="text-dark fw-bold m-0 p-0">${pricePerServing}</p>
+              </div>
+            </div>
           )}
+
+          <div className="mt-auto position-absolute bottom-0 pb-3">
+            {search && (
+              <Button variant="primary" onClick={handleAddToMenu}>
+                Add to Menu
+              </Button>
+            )}
+            {menu && (
+              <Button variant="outline-danger" size="sm" onClick={handleRemove}>
+                Remove
+              </Button>
+            )}
+          </div>
         </Card.Body>
       </Card>
     </>

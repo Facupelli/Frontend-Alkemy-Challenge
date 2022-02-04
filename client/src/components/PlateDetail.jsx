@@ -58,7 +58,7 @@ export const PlateDetail = () => {
         <NavBar />
         {plate && (
           <Card
-            style={{ width: "35rem" }}
+            style={{ width: "25rem" }}
             className="bg-secondary p-0 mt-5 mx-auto"
           >
             <div>

@@ -13,13 +13,13 @@ export const Plates = () => {
   return (
     <div>
       <MenuInfo />
-      <div className="m-5">
+      <div className="mt-5 mx-auto">
         {/* {menuPlates.length > 0 &&
           menuPlates.map((el) => (
             <Plate image={el.image} title={el.title} id={el.id} />
           ))} */}
         {menuPlates.length > 0 && (
-          <Container className="m-0 p-0">
+          <Container className="pb-5 p-0">
             <Row className="m-0 p-0">
               <Col className="m-0 p-0">
                 {menuPlates.length > 0 && (
@@ -27,6 +27,10 @@ export const Plates = () => {
                     image={menuPlates[0].image}
                     title={menuPlates[0].title}
                     id={menuPlates[0].id}
+                    vegetarian={menuPlates[0].vegetarian}
+                    pricePerServing={menuPlates[0].pricePerServing}
+                    readyInMinutes={menuPlates[0].readyInMinutes}
+                    healthScore={menuPlates[0].healthScore}
                     menu={true}
                   />
                 )}
@@ -37,18 +41,24 @@ export const Plates = () => {
                     image={menuPlates[1].image}
                     title={menuPlates[1].title}
                     id={menuPlates[1].id}
+                    vegetarian={menuPlates[1].vegetarian}
+                    pricePerServing={menuPlates[1].pricePerServing}
+                    readyInMinutes={menuPlates[1].readyInMinutes}
+                    healthScore={menuPlates[1].healthScore}
                     menu={true}
                   />
                 )}
               </Col>
-            </Row>
-            <Row className="m-0 p-0">
               <Col className="m-0 p-0">
                 {menuPlates.length > 2 && (
                   <Plate
                     image={menuPlates[2].image}
                     title={menuPlates[2].title}
                     id={menuPlates[2].id}
+                    vegetarian={menuPlates[2].vegetarian}
+                    pricePerServing={menuPlates[2].pricePerServing}
+                    readyInMinutes={menuPlates[2].readyInMinutes}
+                    healthScore={menuPlates[2].healthScore}
                     menu={true}
                   />
                 )}
@@ -59,11 +69,18 @@ export const Plates = () => {
                     image={menuPlates[3].image}
                     title={menuPlates[3].title}
                     id={menuPlates[3].id}
+                    vegetarian={menuPlates[3].vegetarian}
+                    pricePerServing={menuPlates[3].pricePerServing}
+                    readyInMinutes={menuPlates[3].readyInMinutes}
+                    healthScore={menuPlates[3].healthScore}
                     menu={true}
                   />
                 )}
               </Col>
             </Row>
+            {/* <Row className="m-0 p-0">
+              
+            </Row> */}
           </Container>
         )}
       </div>

@@ -52,6 +52,7 @@ export const Login = ({ loginModal, setLoginModal }) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      size="sm"
     >
       <Modal.Header closeButton>
         <Modal.Title>Hotel Login</Modal.Title>

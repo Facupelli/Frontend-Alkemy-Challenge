@@ -31,7 +31,7 @@ export const Home = () => {
         </div>
       )}
       {seeSearch && (
-        <div className="mb-4">
+        <div className="">
           <Search />
         </div>
       )}
