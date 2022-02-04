@@ -22,7 +22,7 @@ export const getRecipeById = async (id) => {
     );
 
     const recipeInfoNeeded = (({
-      vegetarian,
+      vegan,
       glutenFree,
       cheap,
       healthScore,
@@ -34,7 +34,7 @@ export const getRecipeById = async (id) => {
       dishTypes,
       pricePerServing,
     }) => ({
-      vegetarian,
+      vegan,
       glutenFree,
       cheap,
       healthScore,

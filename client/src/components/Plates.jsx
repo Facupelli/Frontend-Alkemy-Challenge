@@ -1,5 +1,4 @@
 import React from "react";
-import { MenuInfo } from "./MenuInfo";
 import { StoreContext } from "../context/context";
 import { Plate } from "./Plate";
 import { useContext } from "react";
@@ -26,7 +25,7 @@ export const Plates = () => {
                     image={menuPlates[0].image}
                     title={menuPlates[0].title}
                     id={menuPlates[0].id}
-                    vegetarian={menuPlates[0].vegetarian}
+                    vegan={menuPlates[0].vegan}
                     pricePerServing={menuPlates[0].pricePerServing}
                     readyInMinutes={menuPlates[0].readyInMinutes}
                     healthScore={menuPlates[0].healthScore}
@@ -40,7 +39,7 @@ export const Plates = () => {
                     image={menuPlates[1].image}
                     title={menuPlates[1].title}
                     id={menuPlates[1].id}
-                    vegetarian={menuPlates[1].vegetarian}
+                    vegan={menuPlates[1].vegan}
                     pricePerServing={menuPlates[1].pricePerServing}
                     readyInMinutes={menuPlates[1].readyInMinutes}
                     healthScore={menuPlates[1].healthScore}
@@ -54,7 +53,7 @@ export const Plates = () => {
                     image={menuPlates[2].image}
                     title={menuPlates[2].title}
                     id={menuPlates[2].id}
-                    vegetarian={menuPlates[2].vegetarian}
+                    vegan={menuPlates[2].vegan}
                     pricePerServing={menuPlates[2].pricePerServing}
                     readyInMinutes={menuPlates[2].readyInMinutes}
                     healthScore={menuPlates[2].healthScore}
@@ -68,7 +67,7 @@ export const Plates = () => {
                     image={menuPlates[3].image}
                     title={menuPlates[3].title}
                     id={menuPlates[3].id}
-                    vegetarian={menuPlates[3].vegetarian}
+                    vegan={menuPlates[3].vegan}
                     pricePerServing={menuPlates[3].pricePerServing}
                     readyInMinutes={menuPlates[3].readyInMinutes}
                     healthScore={menuPlates[3].healthScore}

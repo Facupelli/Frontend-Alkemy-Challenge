@@ -14,7 +14,7 @@ export const Plate = ({
   search,
   id,
   menu,
-  vegetarian,
+  vegan,
   pricePerServing,
   readyInMinutes,
   healthScore,
@@ -30,7 +30,7 @@ export const Plate = ({
   const handleRemove = () => {
     const plates = menuPlates.filter((el) => id !== el.id);
     const plateRemoved = menuPlates.filter((el) => id === el.id);
-    if (plateRemoved[0].vegetarian === true) {
+    if (plateRemoved[0].vegan === true) {
       setVegCount({
         veg: vegCount.veg - 1,
         meat: vegCount.meat,
@@ -46,10 +46,10 @@ export const Plate = ({
 
   const handleAddToMenu = async () => {
     const plate = await getRecipeById(id);
-    if (plate.vegetarian === true && vegCount.veg === 2) {
+    if (plate.vegan === true && vegCount.veg === 2) {
       setVegModal(true);
     }
-    if (plate.vegetarian === true && vegCount.veg < 2) {
+    if (plate.vegan === true && vegCount.veg < 2) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
         setVegCount({
@@ -60,10 +60,10 @@ export const Plate = ({
         setModal(true);
       }
     }
-    if (plate.vegetarian === false && vegCount.meat === 2) {
+    if (plate.vegan === false && vegCount.meat === 2) {
       setVegModal(true);
     }
-    if (plate.vegetarian === false && vegCount.meat < 2) {
+    if (plate.vegan === false && vegCount.meat < 2) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
         setVegCount({
@@ -116,13 +116,13 @@ export const Plate = ({
               </div>
 
               <div className="d-flex gap-2 align-items-baseline">
-                <p className="h6">Vegetarian:</p>
+                <p className="h6">vegan:</p>
                 <p
                   className={`fw-bold m-0 p-0 ${
-                    vegetarian ? "text-success" : "text-dark"
+                    vegan ? "text-success" : "text-dark"
                   }`}
                 >
-                  {vegetarian === false ? "No" : "Yes"}
+                  {vegan === false ? "No" : "Yes"}
                 </p>
               </div>
               <div className="d-flex gap-2 align-items-baseline">

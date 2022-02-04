@@ -29,10 +29,10 @@ export const PlateDetail = () => {
   }, [id]);
 
   const handleAddToMenu = () => {
-    if (plate.vegetarian === true && vegCount === 2) {
+    if (plate.vegan === true && vegCount === 2) {
       setVegModal(true)
     }
-    if (plate.vegetarian === true && vegCount < 2) {
+    if (plate.vegan === true && vegCount < 2) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
         setVegCount(vegCount + 1)
@@ -40,7 +40,7 @@ export const PlateDetail = () => {
         setModal(true);
       }
     }
-    if (plate.vegetarian === false) {
+    if (plate.vegan === false) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
       } else {
@@ -83,9 +83,9 @@ export const PlateDetail = () => {
 
               <div className="d-flex flex-wrap gap-3">
                 <div className="d-flex gap-2 align-items-baseline">
-                  <p className="h6">Vegetarian:</p>
+                  <p className="h6">Vegan:</p>
                   <p className="text-dark fw-bold">
-                    {plate.vegetarian === false ? "False" : "True"}
+                    {plate.vegan === false ? "False" : "True"}
                   </p>
                 </div>
                 <div className="d-flex gap-2 align-items-baseline">
