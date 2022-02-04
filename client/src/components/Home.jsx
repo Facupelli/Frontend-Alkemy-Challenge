@@ -6,6 +6,7 @@ import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
 import { Search } from "./Search";
 import { StoreContext } from "../context/context";
+import { MenuInfo } from "./MenuInfo";
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
@@ -20,14 +21,17 @@ export const Home = () => {
   // console.log(getRecipeById(648176))
 
   return (
-    <div className="bg-dark min-vh-100">
+    <div className="bg-dark min-vh-100 m-0 p-0">
       {loginModal && (
         <Login loginModal={loginModal} setLoginModal={setLoginModal} />
       )}
       <NavBar loginModal={loginModal} setLoginModal={setLoginModal} />
       {seeMenu && (
-        <div className="">
-          <Plates />
+        <div className="m-0 p-0">
+          <MenuInfo />
+          <div className="mx-5">
+            <Plates />
+          </div>
         </div>
       )}
       {seeSearch && (

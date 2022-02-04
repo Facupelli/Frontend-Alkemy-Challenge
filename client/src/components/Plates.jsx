@@ -12,8 +12,7 @@ export const Plates = () => {
 
   return (
     <div>
-      <MenuInfo />
-      <div className="mt-5 d-flex justify-content-center">
+      <div className="mt-5">
         {/* {menuPlates.length > 0 &&
           menuPlates.map((el) => (
             <Plate image={el.image} title={el.title} id={el.id} />

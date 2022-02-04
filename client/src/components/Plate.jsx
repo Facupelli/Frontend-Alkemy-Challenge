@@ -22,13 +22,15 @@ export const Plate = ({
   const { menuPlates, setMenuPlates, vegCount, setVegCount } =
     useContext(StoreContext);
 
+    console.log('COUNT', vegCount)
+
   const [modal, setModal] = useState(false);
   const [vegModal, setVegModal] = useState(false);
 
   const handleRemove = () => {
     const plates = menuPlates.filter((el) => id !== el.id);
     const plateRemoved = menuPlates.filter((el) => id === el.id);
-    if (plateRemoved.vegetarian === true) {
+    if (plateRemoved[0].vegetarian === true) {
       setVegCount({
         veg: vegCount.veg - 1,
         meat: vegCount.meat,
