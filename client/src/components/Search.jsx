@@ -47,7 +47,7 @@ export const Search = () => {
         .then(() => {
           setLoading(false);
           setValueSearched(values);
-          setCount(1)
+          setCount(0)
           resetForm();
         })
         .catch((e) => console.log(e));

@@ -51,7 +51,7 @@ export const MenuInfo = () => {
   return (
     <Container className="mt-3 pt-2 text-white border border-warning border-1 rounded">
       <Row className="align-items-baseline ">
-        <Col className="d-flex gap-2 justify-content-center align-items-baseline ">
+        <Col sm={12} lg={4} className="d-flex gap-2 justify-content-center align-items-baseline ">
           <span className="">MENU PRICE:</span>
           <p className="fs-5">
             {new Intl.NumberFormat("es-AR", {
@@ -61,7 +61,7 @@ export const MenuInfo = () => {
           </p>
         </Col>
 
-        <Col className="d-flex gap-2 justify-content-center align-items-baseline">
+        <Col sm={12} lg={4} className="d-flex gap-2 justify-content-center align-items-baseline">
           <div className="d-flex align-items-center gap-2">
             <span>PREPARATION</span>
             <i
@@ -76,7 +76,7 @@ export const MenuInfo = () => {
           </p>
         </Col>
 
-        <Col className="d-flex gap-2 justify-content-center align-items-baseline">
+        <Col sm={12} lg={4} className="d-flex gap-2 justify-content-center align-items-baseline">
           <div className="d-flex align-items-center gap-2">
             <span>HEALTH SCORE</span>
             <i className="bi bi-heart-fill" style={{ fontSize: "1.2rem" }}></i>:

@@ -17,7 +17,7 @@ export const Plates = () => {
           ))} */}
       {menuPlates.length > 0 ? (
         <Container className="mt-5 p-0">
-          <Row className="d-flex justify-content-around">
+          <Row className="d-flex justify-content-around gap-3">
             {menuPlates.length > 0 && (
               <Plate
                 image={menuPlates[0].image}
