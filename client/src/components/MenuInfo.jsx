@@ -49,7 +49,7 @@ export const MenuInfo = () => {
   };
 
   return (
-    <Container className="mt-3 pt-2 text-white  border border-warning border-1 rounded">
+    <Container className="mt-3 pt-2 text-white border border-warning border-1 rounded">
       <Row className="align-items-baseline ">
         <Col className="d-flex gap-2 justify-content-center align-items-baseline ">
           <span className="">MENU PRICE:</span>

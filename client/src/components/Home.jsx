@@ -6,7 +6,6 @@ import { MenuInfo } from "./MenuInfo";
 import { useEffect } from "react";
 
 export const Home = () => {
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -17,11 +16,9 @@ export const Home = () => {
     <div className="bg-dark min-vh-100 m-0 p-0">
       <NavBar />
 
-      <div className="m-0 p-0">
+      <div className="">
         <MenuInfo />
-        <div className="mx-5">
-          <Plates />
-        </div>
+        <Plates />
       </div>
     </div>
   );
