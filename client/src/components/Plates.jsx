@@ -16,7 +16,7 @@ export const Plates = () => {
           menuPlates.map((el) => (
             <Plate image={el.image} title={el.title} id={el.id} />
           ))} */}
-        {menuPlates.length > 0 && (
+        {menuPlates.length > 0 ? (
           <Container className="p-0 ">
             <Row className="m-0 p-0 gap-3">
               <Col className="m-0 p-0 ">
@@ -80,6 +80,17 @@ export const Plates = () => {
               
             </Row> */}
           </Container>
+        ) : (
+          <div className="text-white text-center pt-5  d-flex justify-content-center">
+            <div>
+              <p className="p-0 m-0 fw-bold fs-4">
+                Menu is empty!
+              </p>
+              <p className="p-0 m-0 fs-5">
+                Go to /search and add a plate to the menu.
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </div>

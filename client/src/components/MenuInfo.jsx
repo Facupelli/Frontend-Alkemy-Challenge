@@ -81,7 +81,7 @@ export const MenuInfo = () => {
             <span>HEALTH SCORE</span>
             <i className="bi bi-heart-fill" style={{ fontSize: "1.2rem" }}></i>:
           </div>
-          <p className="fs-5">{menuInfo.health ? menuInfo.helath : 0}</p>
+          <p className="fs-5">{menuInfo.health ? menuInfo.health : 0}</p>
         </Col>
       </Row>
     </Container>
