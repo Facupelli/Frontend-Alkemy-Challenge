@@ -6,25 +6,16 @@ import { MenuInfo } from "./MenuInfo";
 import { useEffect } from "react";
 
 export const Home = () => {
-  const [loginModal, setLoginModal] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setLoginModal(true);
     }
   }, []);
 
   return (
     <div className="bg-dark min-vh-100 m-0 p-0">
-      {loginModal && (
-        <Login
-          loginModal={loginModal}
-          setLoginModal={setLoginModal}
-          noClose={true}
-        />
-      )}
-      <NavBar loginModal={loginModal} setLoginModal={setLoginModal} />
+      <NavBar />
 
       <div className="m-0 p-0">
         <MenuInfo />

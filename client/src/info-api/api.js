@@ -3,7 +3,6 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const searchRecipe = async (values, count = 0) => {
   try {
-    console.log('values', values, 'COUNt', count)
     const title = values.title;
 
     const offset = count * 12;

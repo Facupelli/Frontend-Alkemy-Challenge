@@ -9,13 +9,11 @@ import { searchRecipe } from "../info-api/api";
 import { Plate } from "./Plate";
 import { NavBar } from "./NavBar";
 import { useEffect } from "react";
-import { Login } from "./Login";
 import Button from "react-bootstrap/esm/Button";
 
 export const Search = () => {
   const [platesSearched, setPlatesSearched] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
 
   const [valueSearched, setValueSearched] = useState({});
 
@@ -26,7 +24,6 @@ export const Search = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setLoginModal(true);
     }
   }, []);
 
@@ -53,13 +50,6 @@ export const Search = () => {
 
   return (
     <div className="bg-dark  min-vh-100 position-relative ">
-      {loginModal && (
-        <Login
-          loginModal={loginModal}
-          setLoginModal={setLoginModal}
-          noClose={true}
-        />
-      )}
       <NavBar />
       <div className="text-white m-5">
         <form onSubmit={formik.handleSubmit}>
@@ -88,7 +78,8 @@ export const Search = () => {
         <>
           <Container className="mt-5 bg-dark gap-2">
             <Row className="justify-content-center gap-5">
-              {platesSearched && platesSearched.length > 0 &&
+              {platesSearched &&
+                platesSearched.length > 0 &&
                 platesSearched.map((el) => (
                   <Plate
                     key={el.id}

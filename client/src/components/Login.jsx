@@ -1,13 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { NavBar } from "./NavBar";
+import { useContext } from "react";
+import { StoreContext } from "../context/context";
 
-export const Login = ({ loginModal, setLoginModal, noClose }) => {
+
+export const Login = () => {
   const navigate = useNavigate();
+
+  const { setToken } =
+    useContext(StoreContext);
 
   const {
     register,
@@ -18,10 +24,6 @@ export const Login = ({ loginModal, setLoginModal, noClose }) => {
 
   console.log("ERRORS:", errors);
 
-  const handleClose = () => {
-    setLoginModal(false);
-  };
-
   const onSubmit = async (data) => {
     try {
       console.log("ENTRE", data);
@@ -31,10 +33,9 @@ export const Login = ({ loginModal, setLoginModal, noClose }) => {
         data
       );
       const { token } = response.data;
-      console.log(token);
       localStorage.setItem("token", token);
+      setToken(token)
       reset();
-      setLoginModal(false);
       navigate("/");
     } catch (e) {
       swal({
@@ -46,19 +47,13 @@ export const Login = ({ loginModal, setLoginModal, noClose }) => {
   };
 
   return (
-    <Modal
-      show={loginModal}
-      onHide={noClose ? "" : handleClose}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      size="sm"
-    >
-      <Modal.Header>
-        <Modal.Title>Hotel Login</Modal.Title>
-      </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Modal.Body>
+    <div className="bg-dark min-vh-100">
+      <NavBar />
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
+        <div className="w-50 mx-auto">
+          <div className="h4 mb-3 text-white">
+            <div>Hotel Login</div>
+          </div>
           <div className="form-floating mb-3">
             <input
               type="email"
@@ -89,18 +84,13 @@ export const Login = ({ loginModal, setLoginModal, noClose }) => {
               <span className="text-danger">Password is required</span>
             )}
           </div>
-        </Modal.Body>
-        <Modal.Footer>
-          {!noClose && (
-            <Button variant="secondary" onClick={handleClose}>
-              Close
+          <div className="d-flex justify-content-end mt-3">
+            <Button variant="primary" type="submit">
+              Login
             </Button>
-          )}
-          <Button variant="primary" type="submit">
-            Login
-          </Button>
-        </Modal.Footer>
+          </div>
+        </div>
       </form>
-    </Modal>
+    </div>
   );
 };

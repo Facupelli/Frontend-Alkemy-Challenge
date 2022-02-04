@@ -3,40 +3,48 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
-import { Login } from "./Login";
-import { useState } from "react";
+import { StoreContext } from "../context/context";
+import { useContext } from "react";
+import swal from "sweetalert";
 
 export const NavBar = () => {
   const navigate = useNavigate();
-  const [loginModal, setLoginModal] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const { token, setToken } = useContext(StoreContext);
 
   const navigateHome = () => {
-    navigate("/");
+    if (!token) {
+      swal({
+        text: "You have to Log In!",
+        icon: "error",
+      });
+    } else {
+      navigate("/");
+    }
   };
 
   const handleLogin = () => {
-    setLoginModal(true);
+    navigate("/login");
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem('token');
-  }
+    localStorage.removeItem("token");
+    setToken(null);
+  };
 
   const navigateSearch = () => {
-    navigate("/search");
+    if (!token) {
+      swal({
+        text: "You have to Log In!",
+        icon: "error",
+      });
+    } else {
+      navigate("/search");
+    }
   };
 
   return (
     <>
-      {loginModal && (
-        <Login
-          loginModal={loginModal}
-          setLoginModal={setLoginModal}
-          noClose={false}
-        />
-      )}
       <Navbar bg="dark" variant="dark">
         <Container className="pt-2 pb-2">
           <Navbar.Brand href="#home">HOTEL MENU APP</Navbar.Brand>
