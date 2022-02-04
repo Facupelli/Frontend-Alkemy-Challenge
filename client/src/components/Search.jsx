@@ -19,19 +19,12 @@ export const Search = () => {
 
   const [count, setCount] = useState(1);
 
-  console.log("PLATES SEARCHED", platesSearched);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-    }
-  }, []);
-
   const handleLoadMore = async () => {
     await searchRecipe(valueSearched, count).then((res) => {
       const newState = [...platesSearched, res].flat();
       setPlatesSearched(newState);
     });
+    setCount(count + 1)
   };
 
   const formik = useFormik({
@@ -54,6 +47,7 @@ export const Search = () => {
         .then(() => {
           setLoading(false);
           setValueSearched(values);
+          setCount(1)
           resetForm();
         })
         .catch((e) => console.log(e));

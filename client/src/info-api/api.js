@@ -5,6 +5,8 @@ export const searchRecipe = async (values, count = 0) => {
   try {
     const title = values.title;
 
+    console.log('COUNT', count)
+
     const offset = count * 12;
 
     const api = await axios.get(

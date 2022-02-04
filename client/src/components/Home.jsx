@@ -6,12 +6,6 @@ import { MenuInfo } from "./MenuInfo";
 import { useEffect } from "react";
 
 export const Home = () => {
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-    }
-  }, []);
-
   return (
     <div className="bg-dark min-vh-100 m-0 p-0">
       <NavBar />
