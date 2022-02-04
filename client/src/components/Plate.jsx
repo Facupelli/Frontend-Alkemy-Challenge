@@ -22,8 +22,6 @@ export const Plate = ({
   const { menuPlates, setMenuPlates, vegCount, setVegCount } =
     useContext(StoreContext);
 
-  console.log("COUNT", vegCount);
-
   const [modal, setModal] = useState(false);
   const [vegModal, setVegModal] = useState(false);
 

@@ -1,12 +1,15 @@
 const axios = require("axios");
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const searchRecipe = async (values) => {
+export const searchRecipe = async (values, count = 0) => {
   try {
+    console.log('values', values)
     const title = values.title;
 
+    const offset = count * 12;
+
     const api = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?&titleMatch=${title}&number=12&apiKey=${API_KEY}`
+      `https://api.spoonacular.com/recipes/complexSearch?&titleMatch=${title}&number=12&offset=${offset}&apiKey=${API_KEY}`
     );
     const apiInfo = await api.data.results;
     return apiInfo;

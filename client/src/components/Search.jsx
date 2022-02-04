@@ -10,11 +10,16 @@ import { Plate } from "./Plate";
 import { NavBar } from "./NavBar";
 import { useEffect } from "react";
 import { Login } from "./Login";
+import Button from "react-bootstrap/esm/Button";
 
 export const Search = () => {
   const [platesSearched, setPlatesSearched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+
+  const [valueSearched, setValueSearched] = useState({});
+
+  const [count, setCount] = useState(1);
 
   console.log("state", platesSearched);
 
@@ -25,6 +30,14 @@ export const Search = () => {
     }
   }, []);
 
+  const handleLoadMore = async () => {
+    await searchRecipe(valueSearched, count)
+      .then((res) => {
+        const newState = [...platesSearched,res].flat()
+        setPlatesSearched(newState)
+      })
+  };
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -34,7 +47,8 @@ export const Search = () => {
       setLoading(true);
       await searchRecipe(values)
         .then((res) => setPlatesSearched(res))
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
+        .then(() => setValueSearched(values));
     },
   });
 
@@ -72,20 +86,33 @@ export const Search = () => {
           <Spinner animation="border" variant="primary" />
         </div>
       ) : (
-        <Container className="mt-5 bg-dark gap-2">
-          <Row className="justify-content-center gap-5">
-            {platesSearched.length > 0 &&
-              platesSearched.map((el) => (
-                <Plate
-                  key={el.id}
-                  image={el.image}
-                  title={el.title}
-                  search={true}
-                  id={el.id}
-                />
-              ))}
-          </Row>
-        </Container>
+        <>
+          <Container className="mt-5 bg-dark gap-2">
+            <Row className="justify-content-center gap-5">
+              {platesSearched.length > 0 &&
+                platesSearched.map((el) => (
+                  <Plate
+                    key={el.id}
+                    image={el.image}
+                    title={el.title}
+                    search={true}
+                    id={el.id}
+                  />
+                ))}
+            </Row>
+          </Container>
+          {platesSearched.length > 0 && (
+            <div className="d-flex justify-content-center mt-4 pb-4">
+              <Button
+                variant="outline-primary"
+                size="sm"
+                onClick={handleLoadMore}
+              >
+                Load More
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
