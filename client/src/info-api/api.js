@@ -12,6 +12,10 @@ export const searchRecipe = async (values, count = 0) => {
     );
     const apiInfo = await api.data.results;
 
+    if(apiInfo.length === 0){
+      return 'no plates founded'
+    }
+
     return apiInfo;
   } catch (e) {
     console.log(e);

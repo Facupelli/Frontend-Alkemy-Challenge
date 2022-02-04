@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-
+import swal from "sweetalert";
 import { useState } from "react";
 import { searchRecipe } from "../info-api/api";
 import { Plate } from "./Plate";
@@ -38,12 +38,24 @@ export const Search = () => {
     initialValues: {
       title: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true);
       await searchRecipe(values)
-        .then((res) => setPlatesSearched(res))
-        .then(() => setLoading(false))
-        .then(() => setValueSearched(values))
+        .then((res) => {
+          if (res === "no plates founded") {
+            swal({
+              text: "No results",
+              icon: "error",
+            });
+          } else {
+            setPlatesSearched(res);
+          }
+        })
+        .then(() => {
+          setLoading(false);
+          setValueSearched(values);
+          resetForm();
+        })
         .catch((e) => console.log(e));
     },
   });
