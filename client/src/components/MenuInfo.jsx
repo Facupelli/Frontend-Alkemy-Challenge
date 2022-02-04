@@ -38,8 +38,8 @@ export const MenuInfo = () => {
 
   return (
     <Container className="mt-3 pt-2 text-white  border border-warning border-1 rounded">
-      <Row className="align-items-baseline">
-        <Col className="d-flex gap-2 justify-content-center align-items-baseline">
+      <Row className="align-items-baseline ">
+        <Col className="d-flex gap-2 justify-content-center align-items-baseline ">
           <span className="">MENU PRICE:</span>
           <p className="fs-5">
             {new Intl.NumberFormat("es-AR", {
@@ -50,9 +50,13 @@ export const MenuInfo = () => {
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
-          <div className="d-flex align-items-baseline gap-2">
+          <div className="d-flex align-items-center gap-2">
             <span>PREPARATION</span>
-            <i className="bi bi-clock-history" style={{fontSize: "1.5rem"}}></i>:
+            <i
+              className="bi bi-clock-history"
+              style={{ fontSize: "1.2rem" }}
+            ></i>
+            :
           </div>
 
           <p className="fs-5">
@@ -61,7 +65,10 @@ export const MenuInfo = () => {
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
-          <span>HEALTH SCORE:</span>
+          <div className="d-flex align-items-center gap-2">
+            <span>HEALTH SCORE</span>
+            <i class="bi bi-heart-fill" style={{ fontSize: "1.2rem" }}></i>:
+          </div>
           <p className="fs-5">{menuPlates.length > 0 ? healthScore() : 0}</p>
         </Col>
       </Row>

@@ -22,7 +22,7 @@ export const Plate = ({
   const { menuPlates, setMenuPlates, vegCount, setVegCount } =
     useContext(StoreContext);
 
-    console.log('COUNT', vegCount)
+  console.log("COUNT", vegCount);
 
   const [modal, setModal] = useState(false);
   const [vegModal, setVegModal] = useState(false);
@@ -86,7 +86,7 @@ export const Plate = ({
       <Card
         style={{
           width: menu ? "16rem" : "15rem",
-          minHeight: menu ? "27rem" : "",
+          minHeight: menu ? "27rem" : "20rem",
         }}
         className=""
       >
@@ -98,8 +98,8 @@ export const Plate = ({
             alt="Card image"
           />
         </Link>
-        <Card.Body className="pt-2 position-relative">
-          <Card.Title className="text-dark ">{title}</Card.Title>
+        <Card.Body className="pt-2 position-relative ">
+          <Card.Title className="text-dark ">{title.length > 40 ? title.slice(0,40) + '...' : title}</Card.Title>
           <hr className="mt-0 mb-2 text-primary " />
           {/* <Button variant="primary" className="">
           See more
@@ -131,12 +131,13 @@ export const Plate = ({
               </div>
             </div>
           )}
-
-          {search && (
-            <Button variant="primary" onClick={handleAddToMenu}>
-              Add to Menu
-            </Button>
-          )}
+          <div className="position-absolute bottom-0 pb-3">
+            {search && (
+              <Button variant="primary" onClick={handleAddToMenu}>
+                Add to Menu
+              </Button>
+            )}
+          </div>
           <div className="position-absolute bottom-0 pb-3">
             {menu && (
               <Button variant="outline-danger" size="sm" onClick={handleRemove}>
