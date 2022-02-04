@@ -8,12 +8,22 @@ import { useState } from "react";
 import { searchRecipe } from "../info-api/api";
 import { Plate } from "./Plate";
 import { NavBar } from "./NavBar";
+import { useEffect } from "react";
+import { Login } from "./Login";
 
 export const Search = () => {
   const [platesSearched, setPlatesSearched] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   console.log("state", platesSearched);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setLoginModal(true);
+    }
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +39,14 @@ export const Search = () => {
   });
 
   return (
-    <div className="bg-dark  min-vh-100 position-relative " >
+    <div className="bg-dark  min-vh-100 position-relative ">
+      {loginModal && (
+        <Login
+          loginModal={loginModal}
+          setLoginModal={setLoginModal}
+          noClose={true}
+        />
+      )}
       <NavBar />
       <div className="text-white m-5">
         <form onSubmit={formik.handleSubmit}>
@@ -51,15 +68,21 @@ export const Search = () => {
       </div>
 
       {loading ? (
-          <div className="position-absolute top-50 start-50 translate-middle">
-            <Spinner animation="border" variant="primary" />
-          </div>
+        <div className="position-absolute top-50 start-50 translate-middle">
+          <Spinner animation="border" variant="primary" />
+        </div>
       ) : (
         <Container className="mt-5 bg-dark gap-2">
           <Row className="justify-content-center gap-5">
             {platesSearched.length > 0 &&
               platesSearched.map((el) => (
-                <Plate key={el.id} image={el.image} title={el.title} search={true} id={el.id}/>
+                <Plate
+                  key={el.id}
+                  image={el.image}
+                  title={el.title}
+                  search={true}
+                  id={el.id}
+                />
               ))}
           </Row>
         </Container>

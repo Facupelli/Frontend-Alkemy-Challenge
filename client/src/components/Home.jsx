@@ -1,44 +1,38 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import { getRecipeById, searchRecipe } from "../info-api/api";
 import { Login } from "./Login";
 import { NavBar } from "./NavBar";
 import { Plates } from "./Plates";
 import { Search } from "./Search";
-import { StoreContext } from "../context/context";
 import { MenuInfo } from "./MenuInfo";
+import { useEffect } from "react";
 
 export const Home = () => {
   const [loginModal, setLoginModal] = useState(false);
 
-  const { menuPlates } = useContext(StoreContext);
-  console.log("HOME", menuPlates);
-
-  const [seeSearch, setSeeSearch] = useState(false);
-  const [seeMenu, setSeeMenu] = useState(true);
-
-  // console.log(searchRecipe())
-  // console.log(getRecipeById(648176))
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setLoginModal(true);
+    }
+  }, []);
 
   return (
     <div className="bg-dark min-vh-100 m-0 p-0">
       {loginModal && (
-        <Login loginModal={loginModal} setLoginModal={setLoginModal} />
+        <Login
+          loginModal={loginModal}
+          setLoginModal={setLoginModal}
+          noClose={true}
+        />
       )}
       <NavBar loginModal={loginModal} setLoginModal={setLoginModal} />
-      {seeMenu && (
-        <div className="m-0 p-0">
-          <MenuInfo />
-          <div className="mx-5">
-            <Plates />
-          </div>
+
+      <div className="m-0 p-0">
+        <MenuInfo />
+        <div className="mx-5">
+          <Plates />
         </div>
-      )}
-      {seeSearch && (
-        <div className="">
-          <Search />
-        </div>
-      )}
+      </div>
     </div>
   );
 };

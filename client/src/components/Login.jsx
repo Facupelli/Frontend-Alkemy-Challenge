@@ -6,7 +6,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
-export const Login = ({ loginModal, setLoginModal }) => {
+export const Login = ({ loginModal, setLoginModal, noClose }) => {
   const navigate = useNavigate();
 
   const {
@@ -48,13 +48,13 @@ export const Login = ({ loginModal, setLoginModal }) => {
   return (
     <Modal
       show={loginModal}
-      onHide={handleClose}
+      onHide={noClose ? "" : handleClose}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       size="sm"
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Hotel Login</Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -91,9 +91,11 @@ export const Login = ({ loginModal, setLoginModal }) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
+          {!noClose && (
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          )}
           <Button variant="primary" type="submit">
             Login
           </Button>

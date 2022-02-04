@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,10 +9,22 @@ import { useEffect } from "react";
 export const MenuInfo = () => {
   const { menuPlates } = useContext(StoreContext);
 
+  const [menuInfo, setMenuInfo] = useState({
+    price: 0,
+    prepTime: 0,
+    health: 0,
+  });
+
+  useEffect(() => {
+    setMenuInfo((prevState) => ({ ...prevState, price: menuPrice() }));
+    setMenuInfo((prevState) => ({ ...prevState, prepTime: preparationTime() }));
+    setMenuInfo((prevState) => ({ ...prevState, health: healthScore() }));
+  }, [menuPlates]);
+
   const menuPrice = () => {
     if (menuPlates.length > 0) {
-      const prices = menuPlates.map((el) => el.pricePerServing);
-      return prices
+      const allPrices = menuPlates.map((el) => el.pricePerServing);
+      return allPrices
         .reduce((prevVal, currentVal) => prevVal + currentVal)
         .toFixed(2);
     }
@@ -20,8 +32,8 @@ export const MenuInfo = () => {
 
   const preparationTime = () => {
     if (menuPlates.length > 0) {
-      const prices = menuPlates.map((el) => el.readyInMinutes);
-      return prices
+      const readyInMinutes = menuPlates.map((el) => el.readyInMinutes);
+      return readyInMinutes
         .reduce((prevVal, currentVal) => prevVal + currentVal)
         .toFixed(0);
     }
@@ -29,8 +41,8 @@ export const MenuInfo = () => {
 
   const healthScore = () => {
     if (menuPlates.length > 0) {
-      const prices = menuPlates.map((el) => el.healthScore);
-      return prices
+      const healthScore = menuPlates.map((el) => el.healthScore);
+      return healthScore
         .reduce((prevVal, currentVal) => prevVal + currentVal)
         .toFixed(0);
     }
@@ -45,7 +57,7 @@ export const MenuInfo = () => {
             {new Intl.NumberFormat("es-AR", {
               style: "currency",
               currency: "ARS",
-            }).format(menuPlates.length > 0 ? menuPrice() : 0)}
+            }).format(menuInfo.price ? menuInfo.price : 0)}
           </p>
         </Col>
 
@@ -60,16 +72,16 @@ export const MenuInfo = () => {
           </div>
 
           <p className="fs-5">
-            {menuPlates.length > 0 ? preparationTime() : 0} min
+            {menuInfo.prepTime ? menuInfo.prepTime : 0} min
           </p>
         </Col>
 
         <Col className="d-flex gap-2 justify-content-center align-items-baseline">
           <div className="d-flex align-items-center gap-2">
             <span>HEALTH SCORE</span>
-            <i class="bi bi-heart-fill" style={{ fontSize: "1.2rem" }}></i>:
+            <i className="bi bi-heart-fill" style={{ fontSize: "1.2rem" }}></i>:
           </div>
-          <p className="fs-5">{menuPlates.length > 0 ? healthScore() : 0}</p>
+          <p className="fs-5">{menuInfo.health ? menuInfo.helath : 0}</p>
         </Col>
       </Row>
     </Container>
