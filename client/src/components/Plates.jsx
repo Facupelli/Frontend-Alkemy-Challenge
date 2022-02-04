@@ -13,15 +13,15 @@ export const Plates = () => {
   return (
     <div>
       <MenuInfo />
-      <div className="mt-5 mx-auto">
+      <div className="mt-5 d-flex justify-content-center">
         {/* {menuPlates.length > 0 &&
           menuPlates.map((el) => (
             <Plate image={el.image} title={el.title} id={el.id} />
           ))} */}
         {menuPlates.length > 0 && (
-          <Container className="pb-5 p-0">
-            <Row className="m-0 p-0">
-              <Col className="m-0 p-0">
+          <Container className="p-0 ">
+            <Row className="m-0 p-0 gap-3">
+              <Col className="m-0 p-0 ">
                 {menuPlates.length > 0 && (
                   <Plate
                     image={menuPlates[0].image}

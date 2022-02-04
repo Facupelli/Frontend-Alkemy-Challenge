@@ -24,7 +24,7 @@ export const NavBar = ({
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Container>
+      <Container className="pt-2 pb-2">
         <Navbar.Brand href="#home">HOTEL MENU APP</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link onClick={navigateHome}>Menu</Nav.Link>

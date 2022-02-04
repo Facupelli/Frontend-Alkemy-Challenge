@@ -26,29 +26,48 @@ export const Plate = ({
   const [vegModal, setVegModal] = useState(false);
 
   const handleRemove = () => {
-    console.log("ENTRE");
     const plates = menuPlates.filter((el) => id !== el.id);
-    console.log("REMOVE", plates);
+    const plateRemoved = menuPlates.filter((el) => id === el.id);
+    if (plateRemoved.vegetarian === true) {
+      setVegCount({
+        veg: vegCount.veg - 1,
+        meat: vegCount.meat,
+      });
+    } else {
+      setVegCount({
+        veg: vegCount.veg,
+        meat: vegCount.meat - 1,
+      });
+    }
     setMenuPlates(plates);
   };
 
   const handleAddToMenu = async () => {
     const plate = await getRecipeById(id);
-    if (plate.vegetarian === true && vegCount === 2) {
-      console.log("entre");
+    if (plate.vegetarian === true && vegCount.veg === 2) {
       setVegModal(true);
     }
-    if (plate.vegetarian === true && vegCount < 2) {
+    if (plate.vegetarian === true && vegCount.veg < 2) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
-        setVegCount(vegCount + 1);
+        setVegCount({
+          veg: vegCount.veg + 1,
+          meat: vegCount.meat,
+        });
       } else {
         setModal(true);
       }
     }
-    if (plate.vegetarian === false) {
+    if (plate.vegetarian === false && vegCount.meat === 2) {
+      setVegModal(true);
+    }
+    if (plate.vegetarian === false && vegCount.meat < 2) {
       if (menuPlates.length < 4) {
         setMenuPlates([...menuPlates, plate]);
+        setVegCount({
+          veg: vegCount.veg,
+          meat: vegCount.meat + 1,
+        });
       } else {
         setModal(true);
       }
@@ -63,7 +82,10 @@ export const Plate = ({
       )}
 
       <Card
-        style={{ width: menu ? "17rem" : "15rem", minHeight: "27rem" }}
+        style={{
+          width: menu ? "16rem" : "15rem",
+          minHeight: menu ? "27rem" : "",
+        }}
         className=""
       >
         <Link to={`/recipe/${id}`}>
@@ -93,8 +115,12 @@ export const Plate = ({
 
               <div className="d-flex gap-2 align-items-baseline">
                 <p className="h6">Vegetarian:</p>
-                <p className="text-dark fw-bold m-0 p-0">
-                  {vegetarian === false ? "False" : "True"}
+                <p
+                  className={`fw-bold m-0 p-0 ${
+                    vegetarian ? "text-success" : "text-dark"
+                  }`}
+                >
+                  {vegetarian === false ? "No" : "Yes"}
                 </p>
               </div>
               <div className="d-flex gap-2 align-items-baseline">
@@ -104,12 +130,12 @@ export const Plate = ({
             </div>
           )}
 
-          <div className="mt-auto position-absolute bottom-0 pb-3">
-            {search && (
-              <Button variant="primary" onClick={handleAddToMenu}>
-                Add to Menu
-              </Button>
-            )}
+          {search && (
+            <Button variant="primary" onClick={handleAddToMenu}>
+              Add to Menu
+            </Button>
+          )}
+          <div className="position-absolute bottom-0 pb-3">
             {menu && (
               <Button variant="outline-danger" size="sm" onClick={handleRemove}>
                 Remove

@@ -26,7 +26,7 @@ export const Home = () => {
       )}
       <NavBar loginModal={loginModal} setLoginModal={setLoginModal} />
       {seeMenu && (
-        <div>
+        <div className="">
           <Plates />
         </div>
       )}
