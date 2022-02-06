@@ -29,7 +29,7 @@ export const Login = () => {
       console.log("ENTRE", data);
 
       const response = await axios.post(
-        "http://challenge-react.alkemy.org/",
+        "http://challenge-react.alkemy.org",
         data
       );
       console.log(response)
