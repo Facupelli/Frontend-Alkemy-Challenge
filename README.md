@@ -10,5 +10,8 @@ You cannot enter any routee unless you are logged.
 The app uses the spoonacular API (https://spoonacular.com/)
 
 <img src="./media/home.png" alt="start_screen"/>
+<img src="./media/search.png" alt="start_screen"/>
+<img src="./media/warning.png" alt="start_screen"/>
+
 
 
