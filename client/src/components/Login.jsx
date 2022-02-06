@@ -32,6 +32,7 @@ export const Login = () => {
         "http://challenge-react.alkemy.org/",
         data
       );
+      console.log(response)
       const { token } = response.data;
       localStorage.setItem("token", token);
       setToken(token)
